@@ -1,0 +1,5 @@
+It can't be easier. Just call:
+
+sudo update_cadabra.sh
+
+IMPORTANT: don't forget to run chmod u+x in update_cadabra.sh before execute
