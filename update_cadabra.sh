@@ -14,7 +14,7 @@ port selfupdate
 echo "==> update and clean outdated ports"
 port -d sync
 portindex
-port upgrade installed
+port upgrade --force installed
 echo "==> uninstalling inactive ports"
 port -f uninstall inactive
 #port clean --all installed - this isn't enough?
