@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # update cadabra!
-# update MacPorts + RubyGems in a single line
+# auto-update rubygems + gems + macports + ports + textmate bundles, pain-free!
 # IMPORTANT: don't forget to run chmod u+x in this file before execute
 
 if [ "$(whoami)" != 'root' ]; then
@@ -11,13 +11,11 @@ fi
 
 if which -s port
 then
-	echo "==> update MacPorts"
+	echo "==> update macports, ports, clean outdated ports and uninstall inactive ports"
 	port selfupdate
-	echo "==> update and clean outdated ports"
 	port -d sync
 	portindex
 	port upgrade installed
-	echo "==> uninstalling inactive ports"
 	port -f uninstall inactive
 	#port clean --all installed - this isn't enough?
 	port -f -p clean --all installed
@@ -25,16 +23,15 @@ fi
 
 if which -s gem
 then
-	echo "==> update RubyGems"
+	echo "==> update rubygems, update gems and clean outdated gems"
 	gem update -q --system
-	echo "==> update and clean outdated gems"
 	gem update -q
 	gem cleanup -q
 fi
 
 if [ -d ~/Library/Application\ Support/TextMate/Bundles ]
 then
-	echo "==> update TextMate Bundles"
+	echo "==> update textmate bundles"
 	cd ~/Library/Application\ Support/TextMate/Bundles
 	ls | while read fn; do
 		if [ -d "${fn}/.git" ]
