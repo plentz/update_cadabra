@@ -30,7 +30,7 @@ if which -s port
 then
 	echo "==> update macports, ports, clean outdated ports and uninstall inactive ports"
 	sudo -E port -q selfupdate
-	sudo -E port -q -d sync
+	sudo -E port -q -d sync > /dev/null
 	sudo -E port -u -q upgrade installed
 	#sudo -E port -f uninstall inactive (-u option in the previous line do this)
 	#sudo -E port clean --all installed - this isn't enough?
@@ -41,7 +41,7 @@ fi
 if which -s brew
 then
 	echo "==> update homebrew formulas"
-	brew update
+	brew update > /dev/null
 fi
 
 if which -s gem
@@ -55,10 +55,10 @@ fi
 if which -s rvm
 then
 	echo "==> update rvm, rubygems and update the gems"
-	rvm update
-	rvm reload
-	rvm gem update -q --system
-	rvm gem update -q
+	rvm update > /dev/null
+	rvm reload > /dev/null
+	rvm gem update -q --system > /dev/null
+	rvm gem update -q > /dev/null
 	#rvm gem cleanup -q #see *1
 fi
 
@@ -69,7 +69,7 @@ then
 	ls | while read bundle; do
 		if [ -d "${bundle}/.git" ]
 		then
-			echo "> ${bundle}"
+			echo " > ${bundle}"
 			cd "${bundle}"
 			# git doesnt allow me to do a git pull outside the dir (or the man page is a huge #fail)
 			git pull -q
@@ -78,5 +78,5 @@ then
 	done
 fi
 
-popd  > /dev/null
+popd > /dev/null
 
