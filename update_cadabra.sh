@@ -13,6 +13,22 @@ fi
 
 sudo echo "update cadabra starting ... " # just to get sudo access and don't bother you later :)
 
+# find the dir of this script
+SCRIPT_PATH="${BASH_SOURCE[0]}";
+if([ -h "${SCRIPT_PATH}" ]) then
+  while([ -h "${SCRIPT_PATH}" ]) do SCRIPT_PATH=`readlink "${SCRIPT_PATH}"`; done
+fi
+pushd . > /dev/null
+cd `dirname ${SCRIPT_PATH}` > /dev/null
+SCRIPT_PATH=`pwd`;
+
+cd $SCRIPT_PATH
+echo "==> trying to self-update :)"
+pwd
+git pull -q
+
+popd  > /dev/null
+
 if which -s port
 then
 	echo "==> update macports, ports, clean outdated ports and uninstall inactive ports"
