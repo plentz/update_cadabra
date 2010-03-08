@@ -32,10 +32,6 @@ fi
 
 if which -s rvm
 then
-if [[ -s $HOME/.rvm/scripts/rvm ]] ; then 
-        source $HOME/.rvm/scripts/rvm
-fi
-
 	echo "==> update rvm, rubygems and update the gems"
 	rvm update
 	rvm reload
