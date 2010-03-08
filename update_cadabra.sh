@@ -24,10 +24,7 @@ SCRIPT_PATH=`pwd`;
 
 cd $SCRIPT_PATH
 echo "==> trying to self-update :)"
-pwd
 git pull -q
-
-popd  > /dev/null
 
 if which -s port
 then
@@ -80,3 +77,6 @@ then
 		fi
 	done
 fi
+
+popd  > /dev/null
+
