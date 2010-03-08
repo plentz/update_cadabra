@@ -47,8 +47,8 @@ fi
 if which -s gem
 then
 	echo "==> update rubygems and update the gems"
-	gem update -q --system
-	gem update -q
+	gem update -q --system > /dev/null
+	gem update -q > /dev/null
 	#gem cleanup -q # see *1
 fi
 
