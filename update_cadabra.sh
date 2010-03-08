@@ -4,29 +4,44 @@
 # auto-update rubygems + gems + macports + ports + textmate bundles, pain-free!
 # IMPORTANT: don't forget to run chmod u+x in this file before execute
 
-if [ "$(whoami)" != 'root' ]; then
-  echo "Ooops! You must be root to run this script (or call this script using: sudo $0)"
+# *1 since a lot of gems depends on older versions of other gems, dont cleanup stuff
+
+if [ "$(whoami)" = 'root' ]; then
+  echo "Ooops! Don't run this script with sudo (some tools may need your enviroment to be correctly updated)"
   exit 1
 fi
 
 if which -s port
 then
 	echo "==> update macports, ports, clean outdated ports and uninstall inactive ports"
-	port selfupdate
-	port -d sync
-	portindex
-	port upgrade installed
-	port -f uninstall inactive
-	#port clean --all installed - this isn't enough?
-	port -f -p clean --all installed
+	sudo -E port -q selfupdate
+	sudo -E port -q -d sync
+	sudo -E port -u -q upgrade installed
+	#sudo -E port -f uninstall inactive (-u option in the previous line do this)
+	#sudo -E port clean --all installed - this isn't enough?
+	sudo -E port -f -p -q clean --all installed
 fi
 
 if which -s gem
 then
-	echo "==> update rubygems, update gems and clean outdated gems"
+	echo "==> update rubygems and update the gems"
 	gem update -q --system
 	gem update -q
-	gem cleanup -q
+	#gem cleanup -q # see *1
+fi
+
+if which -s rvm
+then
+if [[ -s $HOME/.rvm/scripts/rvm ]] ; then 
+        source $HOME/.rvm/scripts/rvm
+fi
+
+	echo "==> update rvm, rubygems and update the gems"
+	rvm update
+	rvm reload
+	rvm gem update -q --system
+	rvm gem update -q
+	#rvm gem cleanup -q #see *1
 fi
 
 if [ -d ~/Library/Application\ Support/TextMate/Bundles ]
