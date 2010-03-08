@@ -1,15 +1,17 @@
 #!/bin/bash
 
 # update cadabra!
-# auto-update rubygems + gems + macports + ports + textmate bundles, pain-free!
+# auto-update rvm( + rubygems & gems), rubygems (+ gems), macports (+ ports), homebrew formulas, textmate bundles -- pain-free!
 # IMPORTANT: don't forget to run chmod u+x in this file before execute
 
 # *1 since a lot of gems depends on older versions of other gems, dont cleanup stuff
 
 if [ "$(whoami)" = 'root' ]; then
-  echo "Ooops! Don't run this script with sudo (some tools may need your enviroment to be correctly updated)"
+  echo "Ooops! Don't run this script with sudo (some tools may need your enviroment variables to be correctly updated)"
   exit 1
 fi
+
+sudo echo "update cadabra starting ... " # just to get sudo access and don't bother you later :)
 
 if which -s port
 then
@@ -20,6 +22,13 @@ then
 	#sudo -E port -f uninstall inactive (-u option in the previous line do this)
 	#sudo -E port clean --all installed - this isn't enough?
 	sudo -E port -f -p -q clean --all installed
+	rm -rf PortIndex PortIndex.quick
+fi
+
+if which -s brew
+then
+	echo "==> update homebrew formulas"
+	brew update
 fi
 
 if which -s gem
@@ -44,11 +53,11 @@ if [ -d ~/Library/Application\ Support/TextMate/Bundles ]
 then
 	echo "==> update textmate bundles"
 	cd ~/Library/Application\ Support/TextMate/Bundles
-	ls | while read fn; do
-		if [ -d "${fn}/.git" ]
+	ls | while read bundle; do
+		if [ -d "${bundle}/.git" ]
 		then
-			echo "> ${fn}"
-			cd "${fn}"
+			echo "> ${bundle}"
+			cd "${bundle}"
 			# git doesnt allow me to do a git pull outside the dir (or the man page is a huge #fail)
 			git pull -q
 			cd ..
