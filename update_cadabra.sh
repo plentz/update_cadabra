@@ -4,7 +4,7 @@
 # auto-update rvm( + rubygems & gems), rubygems (+ gems), macports (+ ports), homebrew formulas, textmate bundles -- pain-free!
 # IMPORTANT: don't forget to run chmod u+x in this file before execute
 
-# *1 since a lot of gems depends on older versions of other gems, dont cleanup stuff
+# *1 since some gems depends on older versions of other gems, dont cleanup stuff
 
 if [ "$(whoami)" = 'root' ]; then
   echo "Ooops! Don't run this script with sudo (some tools may need your enviroment variables to be correctly updated)"
@@ -49,7 +49,7 @@ then
 	echo "==> update rubygems and update the gems"
 	gem update -q --system > /dev/null
 	gem update -q > /dev/null
-	#gem cleanup -q # see *1
+	gem cleanup -q
 fi
 
 if which -s rvm
@@ -59,7 +59,7 @@ then
 	rvm reload > /dev/null
 	rvm gem update -q --system > /dev/null
 	rvm gem update -q > /dev/null
-	#rvm gem cleanup -q #see *1
+	rvm gem cleanup -q
 fi
 
 if [ -d ~/Library/Application\ Support/TextMate/Bundles ]
