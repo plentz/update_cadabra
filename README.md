@@ -1,6 +1,8 @@
-# update_cadabra
+## update_cadabra
 
 update_cadabra is a auto-update script for rvm( + rubygems & gems), rubygems (+ gems), macports (+ ports), homebrew formulas, textmate bundles -- pain-free!
+
+* * *
 
 To install (the easy way):
 
