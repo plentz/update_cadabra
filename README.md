@@ -12,6 +12,8 @@ To automagically update everything, run:
 
 	update_cadabra
 	
+
+* * *
 To install (the hard way):
 
 	git clone git://github.com/plentz/update_cadabra.git
