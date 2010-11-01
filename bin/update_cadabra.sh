@@ -47,7 +47,7 @@ fi
 if which -s rvm
 then
 	echo "==> update rvm, rubygems and update the gems"
-	rvm update --head > /dev/null
+	rvm get head > /dev/null
 	rvm reload > /dev/null
 	rvm gem update -q --system > /dev/null
 	rvm gem update -q > /dev/null
