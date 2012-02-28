@@ -1,3 +1,3 @@
 #!/usr/bin/env ruby
 puts "update cadabra starting ..."
-exec "bash -l -c '#{File.dirname(File.dirname(__FILE__))}/bin/update_cadabra.sh'"
+exec "bash -l -c 'source ~/.bash_profile && #{File.dirname(File.dirname(__FILE__))}/bin/update_cadabra.sh'"
