@@ -48,10 +48,9 @@ if which -s rvm
 then
 	echo "==> update rvm, rubygems and update the gems"
 	rvm get head > /dev/null
-	rvm reload > /dev/null
-	rvm gem update -q --system > /dev/null
-	rvm gem update -q > /dev/null
-	rvm gem cleanup -q
+	rvm do gem update -q --system > /dev/null
+	rvm do gem update -q > /dev/null
+	rvm all do gem cleanup -q
 fi
 
 if [ -d ~/Library/Application\ Support/TextMate/Bundles ]
