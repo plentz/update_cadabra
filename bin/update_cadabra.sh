@@ -46,8 +46,8 @@ if which -s rvm
 then
 	echo "==> update rvm, rubygems, update the gems and remove rvm's archives, repos, sources, logs"
 	rvm get head > /dev/null
-	rvm do gem update -q --system > /dev/null
-	rvm do gem update -q > /dev/null
+	rvm all do rvm rubygems latest > /dev/null
+	rvm all do gem update -q > /dev/null
 	rvm all do gem cleanup -q
 	rvm cleanup all > /dev/null
 fi
