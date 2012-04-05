@@ -1,6 +1,6 @@
 ## update_cadabra
 
-update_cadabra is an update script for rvm( + rubygems & gems), rubygems (+ gems), macports (+ ports), homebrew formulas, textmate bundles -- pain-free!
+update_cadabra is an update script for rvm(+rubygems & gems & full cleanup), rubygems (+ gems), macports (+ ports), homebrew(update & upgrade & cleanup), textmate bundles -- pain-free!
 
 * * *
 

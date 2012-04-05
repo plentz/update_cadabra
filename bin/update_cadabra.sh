@@ -1,15 +1,11 @@
 #!/bin/bash
 
-# update cadabra!
-# auto-update rvm( + rubygems & gems), rubygems (+ gems), macports (+ ports), homebrew formulas, textmate bundles -- pain-free!
-# IMPORTANT: don't forget to run chmod u+x in this file before execute
-
 if [ "$(whoami)" = 'root' ]; then
   echo "Ooops! Don't run this script with sudo (some tools may need your enviroment variables to be correctly updated)"
   exit 1
 fi
 
-sudo echo "" # just to get sudo access and don't bother you later :)
+sudo echo "" > /dev/null # just to get sudo access and don't bother you later :)
 
 # find the dir of this script
 SCRIPT_PATH="${BASH_SOURCE[0]}";
@@ -32,8 +28,10 @@ fi
 
 if which -s brew
 then
-	echo "==> update homebrew formulas"
+	echo "==> update, upgrade and clean old homebrew formulas"
 	brew update > /dev/null
+	brew upgrade > /dev/null
+	brew cleanup > /dev/null
 fi
 
 if which -s gem
@@ -46,11 +44,12 @@ fi
 
 if which -s rvm
 then
-	echo "==> update rvm, rubygems and update the gems"
+	echo "==> update rvm, rubygems, update the gems and remove rvm's archives, repos, sources, logs"
 	rvm get head > /dev/null
 	rvm do gem update -q --system > /dev/null
 	rvm do gem update -q > /dev/null
 	rvm all do gem cleanup -q
+	rvm cleanup all > /dev/null
 fi
 
 if [ -d ~/Library/Application\ Support/TextMate/Bundles ]
